@@ -1,5 +1,8 @@
 # Amazon Lookout for Equipment Python SDK
 
+[![Documentation Status](https://readthedocs.org/projects/amazon-lookout-for-equipment-sdk/badge/?version=latest)](https://amazon-lookout-for-equipment-sdk.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/lookoutequipment.svg)](https://badge.fury.io/py/lookoutequipment)
+
 The Amazon Lookout for Equipment Python SDK is an open-source library that 
 allows data scientists and software developers to easily build, train and deploy 
 anomaly detection models for industrial time series data using 
@@ -20,9 +23,11 @@ Getting Started With Sample Jupyter Notebooks
 ---------------------------------------------
 
 The best way to quickly review how the Amazon Lookout for Equipment Python SDK 
-works is to review the related example notebook. This notebook provides code and
-descriptions for creating and running a full project in Amazon Lookout for 
-Equipment using the Amazon Lookout for Equipment Python SDK.
+works is to review the related example notebook.
+
+This [notebook](examples/tutorial.ipynb) provides code and descriptions for creating 
+and running a full project in Amazon Lookout for Equipment using the Amazon Lookout 
+for Equipment Python SDK.
 
 
 Example Notebooks in SageMaker
@@ -107,7 +112,7 @@ Using this SDK you can:
 7. Visualize scheduler inferences results
 
 For a detailed API reference of the Amazon Lookout for Equipment Python SDK,
-be sure to view this documentation on readthedocs.
+be sure to view its documentation hosted on [**readthedocs**](https://amazon-lookout-for-equipment-sdk.readthedocs.io/en/latest/).
 
 
 Amazon Lookout for Equipment
