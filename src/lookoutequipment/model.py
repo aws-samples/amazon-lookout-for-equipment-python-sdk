@@ -176,25 +176,19 @@ class LookoutEquipmentModel:
         })
         
     def set_off_condition(self,
-                         tag_name,
-                         operator,
-                         value):
+                         off_condition):
         """
         Configure off-time detection using one of your machine’s sensors.
         
         Parameters:
-            tag_name (string):
-                Sensor representative of the machine’s on/off state
+            off_condition (string):
+                Sensor representative of the machine’s on/off state.
+                Ex: 'tag_name < 1000'
 
-            operator (string):
-                Can be > (greater than) or < (less than)
-
-            value (float):
-                Threshold value for filtering out the off state.
         """
         
         self.create_model_request.update({
-            'OffCondition': f'{tag_name} {operator} {value}'
+            'OffCondition': off_condition
         })
         
     def set_subset_schema(self, field_map):
