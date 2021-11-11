@@ -175,6 +175,28 @@ class LookoutEquipmentModel:
             'EvaluationDataEndTime': evaluation_end.to_pydatetime()
         })
         
+    def set_off_condition(self,
+                         tag_name,
+                         operator,
+                         value):
+        """
+        Configure off-time detection using one of your machine’s sensors.
+        
+        Parameters:
+            tag_name (string):
+                Sensor representative of the machine’s on/off state
+
+            operator (string):
+                Can be > (greater than) or < (less than)
+
+            value (float):
+                Threshold value for filtering out the off state.
+        """
+        
+        self.create_model_request.update({
+            'OffCondition': f'{tag_name} {operator} {value}'
+        })
+        
     def set_subset_schema(self, field_map):
         """
         Configure the inline data schema that will let Lookout for Equipment
