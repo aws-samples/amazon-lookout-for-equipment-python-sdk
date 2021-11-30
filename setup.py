@@ -17,17 +17,18 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.8'
 ]
     
-INSTALL_REQUIRES = [
-    'numpy',
-    'pandas',
-    'boto3',
-    'matplotlib',
-    'markdown',
-    'pyarrow',
-    's3fs',
-    'tqdm',
-    'scipy'
-]
+INSTALL_REQUIRES = open('requirements.txt','r').readlines()
+# [
+#    'numpy',
+#    'pandas',
+#    'boto3',
+#    'matplotlib',
+#    'markdown',
+#    'pyarrow',
+#    's3fs',
+#    'tqdm',
+#    'scipy'
+# ]
 
 # EXTRAS_REQUIRE = {
 #     'docs': [
