@@ -417,7 +417,7 @@ def delete_dataset(dataset_name, delete_children=False, verbose=False):
     else:
         print(f'No dataset with this name ({dataset_name}) found.')
 
-def generate_replay_data(self, dataset_name, replay_start_timestamp, upload_frequency, 
+def generate_replay_data(dataset_name, replay_start_timestamp, upload_frequency, 
                           replay_days=1, inference_timezone='UTC'):
     """
     Generates inference input data from the training data to test the scheduler.
