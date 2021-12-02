@@ -482,6 +482,9 @@ def generate_replay_data(dataset_name, replay_start_timestamp, upload_frequency,
 
         inference_start_timestamp_utc = str(pd.to_datetime(datetime.strftime(datetime.now()+timedelta(minutes=1),
                                                                              '%Y-%m-%d %H:%M:%S')).ceil(upload_freq_dict[upload_frequency]))
+        # 1. error handling: check if data exists in s3 train path
+        # 2. warning: ingested dataset might change if a different model was trained and ingested data may be different from train data in s3
+
 
         # generate new time index for inference replay data
         time_delta = pd.to_datetime(inference_start_timestamp_utc) - pd.to_datetime(replay_start_timestamp)
