@@ -1,4 +1,4 @@
-boto3
-markdown
-tqdm
-awswrangler
+awswrangler==2.12.1
+boto3==1.17.106
+markdown==3.3.4
+tqdm==4.62.2
