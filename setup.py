@@ -41,12 +41,12 @@ INSTALL_REQUIRES = [
     
 setup(
     name='lookoutequipment',
-    version='0.1.0',
+    version='0.1.1',
     author='Michael Hoarau',
     author_email='michoara@amazon.com',
     description='Python SDK for Amazon Lookout for Equipment',
     license='Apache-2.0',
-    url='https://github.com/awslabs/amazon-lookout-for-equipment-python-sdk',
+    url='https://github.com/aws-samples/amazon-lookout-for-equipment-python-sdk',
     long_description=long_description,
     long_description_content_type='text/markdown',
     packages=find_packages(where='src', include=['lookoutequipment']),
