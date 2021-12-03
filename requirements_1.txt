@@ -1,3 +1,2 @@
 awswrangler
 tqdm
-boto3
