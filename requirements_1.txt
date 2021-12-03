@@ -1,10 +1,11 @@
 numpy
 pandas
 boto3
-plotlib
+botocore
 markdown
+matplotlib
 pyarrow
 s3fs
-tqdm
 scipy
+tqdm
 awswrangler
