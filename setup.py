@@ -41,7 +41,7 @@ INSTALL_REQUIRES = [
     
 setup(
     name='lookoutequipment',
-    version='0.1.1',
+    version='0.1.2',
     author='Michael Hoarau',
     author_email='michoara@amazon.com',
     description='Python SDK for Amazon Lookout for Equipment',

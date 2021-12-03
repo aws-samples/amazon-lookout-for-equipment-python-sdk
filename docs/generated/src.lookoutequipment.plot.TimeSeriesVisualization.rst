@@ -35,6 +35,7 @@
        ~TimeSeriesVisualization.add_signal
        ~TimeSeriesVisualization.add_train_test_split
        ~TimeSeriesVisualization.plot
+       ~TimeSeriesVisualization.plot_histograms
     
     
     .. automethod:: __init__
@@ -44,6 +45,7 @@
     .. automethod:: add_signal
     .. automethod:: add_train_test_split
     .. automethod:: plot
+    .. automethod:: plot_histograms
     
     
     

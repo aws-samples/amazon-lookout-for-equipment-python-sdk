@@ -109,6 +109,9 @@ period or configure an inference scheduler.
 Evaluating a trained model
 ==========================
 
+Plot detected events
+--------------------
+
 Once a model is trained, the `DescribeModel API`_ from Amazon Lookout for 
 Equipment will record the metrics associated to the training.
 
@@ -157,6 +160,36 @@ This code will generate the following plot where you can see:
 * The **predicted events** are shown in a red ribbon labelled "Detected events"
     
 .. image:: images/model_evaluation.png
+
+Plot signal distribution
+------------------------
+You might be curious about why Amazon Lookout for Equipment detected an 
+anomalous event. Sometime, looking at a few of the time series is enough. 
+But sometime, you need to dig deeper.
+
+The following function, aggregate the signal importance of every signals over 
+the evaluation period and sum these contributions over time for each signal. 
+Then, it takes the top 8 signals and plot two distributions: one with the values 
+each signal takes during the normal periods (present in the evaluation range) 
+and a second one with the values taken during all the anomalous events detected 
+in the evaluation range. This will help you visualize any significant shift of 
+values for the top contributing signals.
+
+You can also restrict these histograms over a specific range of time by setting 
+the ``start`` and ``end`` arguments of the following function with datetime 
+values::
+
+    from lookoutequipment import plot
+    
+    TSViz = plot.TimeSeriesVisualization(timeseries_df=data['data'], data_format='tabular')
+    TSViz.add_predictions([predicted_ranges])
+    fig = TSViz.plot_histograms(freq='5min')
+
+This code will generate the following plot where you can see a histogram for
+the top 8 signals contributing to the detected events present in the evaluation
+range of the model:
+
+.. image:: images/histograms.jpg
 
 Scheduler management
 ====================
