@@ -46,7 +46,7 @@ docutils==0.15.2
 ecdsa==0.17.0
 environment-kernels==1.1.1
 et-xmlfile==1.0.1
-lask==1.1.2
+flask==1.1.2
 Flask-Cors==3.0.10
 fsspec==2021.4.0
 lob2==0.7
