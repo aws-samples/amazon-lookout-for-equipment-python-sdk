@@ -75,6 +75,7 @@ class TimeSeriesVisualization:
         self._start_date = None
         self._end_date = None
         self._labels_df = None
+        self._predictions_ranges = None
         self._predictions_df = []
         self._predictions_title = []
         self._rolling_average = False
@@ -87,10 +88,11 @@ class TimeSeriesVisualization:
         self.verbose = verbose
         self.resample = resample
 
-        # Prepare the figure:
+        # Prepare the figures:
         self.fig_height = 4
         self.height_ratios = []
         self.nb_plots = 0
+        self.expanded_results = None
         
         if self._format not in ['timeseries', 'tabular']:
             raise Exception('`data_format` can only either be timeseries or tabular')
@@ -291,6 +293,7 @@ class TimeSeriesVisualization:
         self.nb_plots += len(predictions_list)
         self.fig_height += 1.0 * len(predictions_list)
         self.height_ratios += [1.5] * len(predictions_list)
+        self._predictions_ranges = predictions_list
 
         for df in predictions_list:
             self._predictions_df.append(self._convert_ranges(df))
@@ -542,6 +545,137 @@ class TimeSeriesVisualization:
                 label='Rolling leverage', 
                 color='tab:red', 
                 linewidth=1)
+        
+    # ----------
+    # Histogram plot management functions
+    # -----------
+    def plot_histograms(self, freq='1min', prediction_index=0, top_n=8, fig_width=18, start=None, end=None):
+        """
+        Plot values distribution as histograms for the top contributing sensors.
+        
+        Parameters:
+            freq (string):
+                The datetime index frequence (defaults to '1min'). This must 
+                be a string following this format: XXmin where XX is a number
+                of minutes.
+            prediction_index (integer):
+                You can add several predicted ranges in your plot. Use this
+                argument to specify for which one you wish to plot a histogram
+                for (defaults to 0)
+            top_n (integer):
+                Number of top signals to plot (default: 8)
+            fig_width (float):
+                Width of the figure generated (default: 18)
+            start (pandas.DatetTime):
+                Start date of the range to build the values distribution for
+                (default: None, use the evaluation period start)
+            end (pandas.DatetTime):
+                End date of the range to build the values distribution for
+                (default: None, use the evaluation period end)
+                
+        Returns:
+            matplotlib.pyplot.figure: a figure where the histograms are drawn
+        """
+        predicted_ranges_df = self._predictions_df[prediction_index]    
+        abnormal_index = predicted_ranges_df[predicted_ranges_df['Label'] > 0.0].index
+        normal_index = predicted_ranges_df[predicted_ranges_df['Label'] == 0.0].index
+        expanded_results = self._build_feature_importance_dataframe(
+            freq=freq, 
+            prediction_index=prediction_index
+        )
+        
+        if (start is not None) and (end is not None):
+            abnormal_index = predicted_ranges_df[predicted_ranges_df['Label'] > 0.0]
+            abnormal_index = abnormal_index.loc[start:end].index
+            normal_index = predicted_ranges_df[predicted_ranges_df['Label'] == 0.0]
+            normal_index = normal_index.loc[start:end].index
+            expanded_results = expanded_results.loc[start:end]
+        
+        most_contributing_signals = list(expanded_results.sum().sort_values(ascending=False).head(top_n).index)
+        most_contributing_signals = [tag.split('\\')[1] for tag in most_contributing_signals]
+        
+        num_tags = len(most_contributing_signals)
+        num_rows = int(np.ceil(num_tags / 4))
+        fig_height = 5.0 * num_rows * fig_width / 24.0
+        fig = plt.figure(figsize=(fig_width,fig_height))
+
+        for i, current_tag in enumerate(most_contributing_signals):
+            ax = fig.add_subplot(num_rows, 4, i+1)
+            current_df = self._data[current_tag]
+
+            ts1 = current_df.reindex(normal_index).copy()
+            ts2 = current_df.reindex(abnormal_index).copy()
+
+            plot_histogram_comparison(ts2,
+                                      ts1,
+                                      ax=ax, 
+                                      label_timeseries_1=f'Values during abnormal events',
+                                      label_timeseries_2=f'Values during normal periods',
+                                      num_bins=50)
+            ax.set_title(current_tag)
+            
+        return fig
+        
+    def _build_feature_importance_dataframe(self, freq='1min', prediction_index=0):
+        """
+        Builds a feature importance dataframe with the importance evolution of 
+        each signal over time.
+        
+        Parameters:
+            freq (string):
+                The datetime index frequence (defaults to '1min'). This must 
+                be a string following this format: XXmin where XX is a number
+                of minutes.
+            prediction_index (integer):
+                You can add several predicted ranges in your plot. Use this
+                argument to specify for which one you wish to plot a histogram
+                for (defaults to 0)
+                
+        Returns:
+            pandas.DataFrame: a dataframe with the feature importance evolutio
+            of each signal over time.
+        """
+        if self.expanded_results is None:
+            expanded_results = []
+            predicted_ranges = self._predictions_ranges[prediction_index]
+            num_events = predicted_ranges.shape[0]
+            for index, row in predicted_ranges.iterrows():
+                new_row = dict()
+                new_row.update({'start': row['start']})
+                new_row.update({'end': row['end']})
+                new_row.update({'prediction': 1.0})
+
+                diagnostics = pd.DataFrame(row['diagnostics'])
+                diagnostics = dict(zip(diagnostics['name'], diagnostics['value']))
+                new_row = {**new_row, **diagnostics}
+
+                expanded_results.append(new_row)
+
+            expanded_results = pd.DataFrame(expanded_results)
+
+            freq_int = int(freq[:-3])
+            cols = list(expanded_results.columns)[3:]
+            expanded_results['end2'] = expanded_results['end'] + pd.to_timedelta(freq_int, unit='m')
+
+            df1 = expanded_results[['start'] + cols].copy()
+            df2 = expanded_results[['end'] + cols].copy()
+            df3 = expanded_results[['end2'] + cols].copy()
+
+            df1.columns = ['timestamp'] + cols
+            df2.columns = ['timestamp'] + cols
+            df3.columns = ['timestamp'] + cols
+
+            df3.iloc[:, 1:] = 0.0
+
+            expanded_results = pd.concat([df1, df2, df3], axis='index').sort_index()
+            expanded_results = expanded_results.sort_values(by='timestamp', ascending=True)
+            expanded_results = expanded_results.set_index('timestamp')
+            expanded_results = expanded_results.resample(rule=freq).first()
+            expanded_results = expanded_results.fillna(method='ffill')
+            
+            self.expanded_results = expanded_results
+
+        return self.expanded_results
 
     # -------
     # Getters
