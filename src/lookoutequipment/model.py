@@ -106,6 +106,22 @@ class LookoutEquipmentModel:
             'DatasetName': dataset_name
         })
         
+    def set_off_conditions(self, off_conditions_string):
+        """
+        Tells Lookout for Equipment to use one of the signals as a guide to
+        tell if the asset/process is currently on or off.
+        
+        Parameters:
+            off_conditions_string (string):
+                A string with the format `component_name\\tag_name>0.0` where
+                the condition can either be `<` or `>` with a real value
+                materializing the boundary used to identify off time from on
+                time.
+        """
+        self.create_model_request.update({
+            'OffCondition': off_conditions_string
+        })
+        
     def set_label_data(self, bucket, prefix, access_role_arn):
         """
         Tell Lookout for Equipment to look for labelled data to train the
