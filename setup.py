@@ -17,7 +17,7 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.8'
 ]
     
-INSTALL_REQUIRES = open('requirements.txt','r').readlines()
+INSTALL_REQUIRES = open('requirements_1.txt','r').readlines()
     
 setup(
     name='lookoutequipment',
