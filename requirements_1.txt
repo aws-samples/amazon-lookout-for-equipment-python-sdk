@@ -3,7 +3,7 @@ aiohttp==3.7.4.post0
 alabaster==0.7.12
 anaconda-client==1.7.2
 astroid==2.8.2
-sync-generator==1.10
+async-generator==1.10
 async-timeout==3.0.1
 attrs==21.2.0
 Automat==20.2.0
