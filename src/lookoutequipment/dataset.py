@@ -446,7 +446,7 @@ def generate_replay_data(dataset_name, replay_start_timestamp, upload_frequency,
 
     # get train path from `dataset_name`
     client = boto3.client('lookoutequipment')
-    while l4e_client.describe_dataset(DatasetName=dataset_name)['Status']=='INGESTION_IN_PROGRESS':
+    while client.describe_dataset(DatasetName=dataset_name)['Status']=='INGESTION_IN_PROGRESS':
         print(f'Ingestion job is still in progress for dataset: {dataset_name}.')
         time.sleep(10)
 
