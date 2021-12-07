@@ -17,27 +17,7 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.8'
 ]
     
-INSTALL_REQUIRES = [
-    'numpy',
-    'pandas',
-    'boto3',
-    'matplotlib',
-    'markdown',
-    'pyarrow',
-    's3fs',
-    'tqdm',
-    'scipy'
-]
-
-# EXTRAS_REQUIRE = {
-#     'docs': [
-#         'docutils==0.14',
-#         'sphinx==1.8.5',
-#         'sphinx-gallery',
-#         'numpydoc',
-#         'matplotlib'
-#     ]
-# }
+INSTALL_REQUIRES = open('requirements.txt','r').readlines()
     
 setup(
     name='lookoutequipment',
