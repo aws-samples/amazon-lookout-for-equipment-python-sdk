@@ -25,13 +25,14 @@ from .plot import *
 from .scheduler import *
 from .schema import *
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __all__ = [
     'list_datasets',
     'load_dataset',
     'upload_dataset',
     'upload_file_to_s3',
     'prepare_inference_data',
+    'generate_replay_data',
     'LookoutEquipmentDataset',
     
     'LookoutEquipmentAnalysis',

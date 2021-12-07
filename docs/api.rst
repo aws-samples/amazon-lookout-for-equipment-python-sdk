@@ -40,6 +40,7 @@ Datasets
    dataset.load_dataset
    dataset.upload_dataset
    dataset.prepare_inference_data
+   dataset.generate_replay_data
    
    :template: class.rst
    
