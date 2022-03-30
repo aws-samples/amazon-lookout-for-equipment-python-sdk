@@ -1,14 +1,17 @@
-# Amazon Lookout for Equipment Python SDK
+# Amazon Lookout for Equipment Python Toolbox
 
 [![Documentation Status](https://readthedocs.org/projects/amazon-lookout-for-equipment-sdk/badge/?version=latest)](https://amazon-lookout-for-equipment-sdk.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/lookoutequipment.svg)](https://badge.fury.io/py/lookoutequipment)
 
-The Amazon Lookout for Equipment Python SDK is an open-source library that 
+The Amazon Lookout for Equipment Python toolbox is an open-source library that 
 allows data scientists and software developers to easily build, train and deploy 
 anomaly detection models for industrial time series data using 
-[**Amazon Lookout for Equipment**](https://aws.amazon.com/lookout-for-equipment/)
+[**Amazon Lookout for Equipment**](https://aws.amazon.com/lookout-for-equipment/).
+This library is a wrapper on top of the Lookout for Equipment boto3 API and is
+provided to kick start your journey with this service. Should you have any improvement
+suggestions or bugs to report, please file an issue against this GitHub repository.
 
-The Amazon Lookout for Equipment Python SDK enables you to do the following:
+The Amazon Lookout for Equipment Python toolbox enables you to do the following:
 
 - Build dataset schema
 - Data upload to the necessary S3 structure
@@ -22,12 +25,12 @@ The Amazon Lookout for Equipment Python SDK enables you to do the following:
 Getting Started With Sample Jupyter Notebooks
 ---------------------------------------------
 
-The best way to quickly review how the Amazon Lookout for Equipment Python SDK 
+The best way to quickly review how the Amazon Lookout for Equipment Python toolbox 
 works is to review the related example notebook.
 
 This [notebook](examples/tutorial.ipynb) provides code and descriptions for creating 
 and running a full project in Amazon Lookout for Equipment using the Amazon Lookout 
-for Equipment Python SDK.
+for Equipment Python toolbox.
 
 
 Example Notebooks in SageMaker
@@ -56,10 +59,10 @@ In Amazon SageMaker, upload the Jupyter notebook from the **`examples/`** folder
 4. Run the notebook cells
 
 
-Installing the Amazon Lookout for Equipment Python SDK
+Installing the Amazon Lookout for Equipment Python toolbox
 --------------------------------------------------
 
-The Amazon Lookout for Equipment Python SDK is built to PyPI and can be 
+The Amazon Lookout for Equipment Python toolbox is built to PyPI and can be 
 installed with pip as follows:
 
 ```
@@ -79,26 +82,26 @@ command in the root directory of the repository:
 Supported Operating Systems
 ---------------------------------------------
 
-The Amazon Lookout for Equipment Python SDK supports Unix/Linux and Mac.
+The Amazon Lookout for Equipment Python toolbox supports Unix/Linux and Mac.
 
 
 Supported Python Versions
 ---------------------------------------------
 
-The Amazon Lookout for Equipment Python SDK is tested on:
+The Amazon Lookout for Equipment Python toolbox is tested on:
 
 * Python 3.6
 
 
-Overview of SDK
+Overview of toolbox
 ---------------
 
-The Amazon Lookout for Equipment Python SDK provides a Python API that enables 
+The Amazon Lookout for Equipment Python toolbox provides a Python API that enables 
 you to easily build, train and deploy anomaly detection models for industrial 
 time series data using Amazon Lookout for Equipment, and directly in your python 
 code and Jupyter notebooks.
 
-Using this SDK you can:
+Using this toolbox you can:
 
 1. Build dataset schema
 2. Data upload to the necessary S3 structure
@@ -111,7 +114,7 @@ Using this SDK you can:
 6. Manage schedulers (start, stop, delete) whenever necessary
 7. Visualize scheduler inferences results
 
-For a detailed API reference of the Amazon Lookout for Equipment Python SDK,
+For a detailed API reference of the Amazon Lookout for Equipment Python toolbox,
 be sure to view its documentation hosted on [**readthedocs**](https://amazon-lookout-for-equipment-sdk.readthedocs.io/en/latest/).
 
 
@@ -131,7 +134,7 @@ Lookout for Equipment can perform only operations that the user permits.  You
 can read more about which permissions are necessary in the 
 [**AWS Documentation**](https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/what-is.html).
 
-The Amazon Lookout for Equipment Python SDK should not require any additional 
+The Amazon Lookout for Equipment Python toolbox should not require any additional 
 permissions aside from what is required for using `boto3`  However, if you are
 using an IAM role with a path in it, you should grant permission for `iam:GetRole`.
 
@@ -144,6 +147,6 @@ See [**CONTRIBUTING.md**](CONTRIBUTING.md) for more information.
 
 Licensing
 ---------
-Amazon Lookout for Equipment Python SDK is licensed under the Apache 2.0 
+Amazon Lookout for Equipment Python toolbox is licensed under the Apache 2.0 
 License. It is copyright 2021 Amazon.com, Inc. or its affiliates. All Rights 
 Reserved. The license is available at: **http://aws.amazon.com/apache2.0/**.
