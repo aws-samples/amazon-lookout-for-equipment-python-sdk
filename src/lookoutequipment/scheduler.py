@@ -639,6 +639,11 @@ class LookoutEquipmentScheduler:
                 new_row.update({'timestamp': index})
                 new_row.update({'prediction': row['prediction']})
                 
+                # Models trained before March 28, 2022 do not expose the raw
+                # anomaly score so let's check if we actually have it:
+                if 'anomaly_score' in results_df.columns:
+                    new_row.update({'anomaly_score': row['anomaly_score']})
+                
                 if row['prediction'] == 1:
                     diagnostics = pd.DataFrame(row['diagnostics'])
                     diagnostics = dict(zip(diagnostics['name'], diagnostics['value']))

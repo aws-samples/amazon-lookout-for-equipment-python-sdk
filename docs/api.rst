@@ -111,6 +111,7 @@ Plot
 
    plot.plot_histogram_comparison
    plot.plot_event_barh
+   plot.plot_range
 
    :template: class.rst
    

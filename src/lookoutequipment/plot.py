@@ -905,3 +905,32 @@ def plot_event_barh(event_details, num_signals=10, fig_width=12):
     plt.title(f'Event detected at {event_time}', fontsize=12, fontweight='bold')
     
     return fig, ax
+    
+def plot_range(range_df, range_title, color, ax, column_name):
+    """
+    Plot a range with either labelled or predicted events as a filled
+    area positionned under the timeseries data.
+
+    Parameters:
+        range_df (pandas.DataFrame):
+            A DataFrame that must contain at least a DateTimeIndex and a
+            column called "Label"
+        range_title (string):
+            Title of the ax containing this range
+        color (string):
+            A string used as a color for the filled area of the plot
+        ax (matplotlib.pyplot.Axis):
+            The ax in which to render the range plot
+        column_name (string):
+            The column from the range_df dataframe to use to plot the range
+    """
+    ax.plot(range_df[column_name], color=color)
+    ax.fill_between(range_df.index, 
+                    y1=range_df[column_name], 
+                    y2=0, 
+                    alpha=0.1, 
+                    color=color, 
+                    label=range_title)
+    ax.axes.get_xaxis().set_ticks([])
+    ax.axes.get_yaxis().set_ticks([])
+    ax.set_xlabel(range_title, fontsize=12)

@@ -25,7 +25,7 @@ from .plot import *
 from .scheduler import *
 from .schema import *
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 __all__ = [
     'list_datasets',
     'load_dataset',
@@ -44,6 +44,7 @@ __all__ = [
     'compute_bin_edges',
     'plot_histogram_comparison',
     'plot_event_barh',
+    'plot_range',
     
     'LookoutEquipmentSchedulerInspector',
     'LookoutEquipmentScheduler',

@@ -21,7 +21,7 @@ INSTALL_REQUIRES = open('requirements.txt','r').readlines()
     
 setup(
     name='lookoutequipment',
-    version='0.1.3',
+    version='0.1.4',
     author='Michael Hoarau',
     author_email='michoara@amazon.com',
     description='Python SDK for Amazon Lookout for Equipment',
