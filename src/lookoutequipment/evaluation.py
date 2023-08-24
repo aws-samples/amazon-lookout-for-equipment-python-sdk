@@ -13,6 +13,7 @@
 #   limitations under the License.
 
 import boto3
+import json
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -93,7 +94,7 @@ class LookoutEquipmentAnalysis:
         )
         
         if self.labelled_ranges is None:
-            self.labelled_ranges = eval(
+            self.labelled_ranges = json.loads(
                 describe_model_response['ModelMetrics']
             )['labeled_ranges']
             if len(self.labelled_ranges) > 0:
@@ -104,7 +105,7 @@ class LookoutEquipmentAnalysis:
             else:
                 self.labelled_ranges = pd.DataFrame(columns=['start', 'end'])
             
-        self.predicted_ranges = eval(
+        self.predicted_ranges = json.loads(
             describe_model_response['ModelMetrics']
         )['predicted_ranges']
         if len(self.predicted_ranges) > 0:
