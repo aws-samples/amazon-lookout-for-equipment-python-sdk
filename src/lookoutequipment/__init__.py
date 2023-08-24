@@ -25,7 +25,7 @@ from .plot import *
 from .scheduler import *
 from .schema import *
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 __all__ = [
     'list_datasets',
     'load_dataset',

@@ -14,14 +14,17 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8'
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11'
 ]
     
 INSTALL_REQUIRES = open('requirements.txt','r').readlines()
     
 setup(
     name='lookoutequipment',
-    version='0.1.4',
+    version='0.1.5',
     author='Michael Hoarau',
     author_email='michoara@amazon.com',
     description='Python SDK for Amazon Lookout for Equipment',
